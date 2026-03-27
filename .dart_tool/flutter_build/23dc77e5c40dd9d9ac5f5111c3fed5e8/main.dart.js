@@ -27499,7 +27499,7 @@ r.toString
 q.push(r)}return q},
 Zq(a,b,c){var s=0,r=A.M(t.a),q,p,o,n,m
 var $async$Zq=A.N(function(d,e){if(d===1)return A.J(e,r)
-for(;;)switch(s){case 0:p=A.fR("https://simba-39la.onrender.com/api/api/users/register")
+for(;;)switch(s){case 0:p=A.fR("https://simba-39la.onrender.com/api/users/register")
 o=t.N
 n=A.aa(["Content-Type","application/json"],o,o)
 m=A
@@ -27512,7 +27512,7 @@ case 1:return A.K(q,r)}})
 return A.L($async$Zq,r)},
 Zp(a,b){var s=0,r=A.M(t.a),q,p,o,n,m
 var $async$Zp=A.N(function(c,d){if(c===1)return A.J(d,r)
-for(;;)switch(s){case 0:p=A.fR("https://simba-39la.onrender.com/api/api/users/signin")
+for(;;)switch(s){case 0:p=A.fR("https://simba-39la.onrender.com/api/users/signin")
 o=t.N
 n=A.aa(["Content-Type","application/json"],o,o)
 m=A
@@ -27528,7 +27528,7 @@ var $async$Zo=A.N(function(b,c){if(b===1)return A.J(c,r)
 for(;;)switch(s){case 0:p=t.N
 o=A
 s=3
-return A.Q(A.aS9(A.fR("https://simba-39la.onrender.com/api/api/users/profile"),A.aa(["Authorization","Bearer "+a,"Content-Type","application/json"],p,p)),$async$Zo)
+return A.Q(A.aS9(A.fR("https://simba-39la.onrender.com/api/users/profile"),A.aa(["Authorization","Bearer "+a,"Content-Type","application/json"],p,p)),$async$Zo)
 case 3:q=o.au2(c,"Failed to load profile")
 s=1
 break

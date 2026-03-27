@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   // Base URL now includes /api
-  static const String baseUrl = "https://simba-39la.onrender.com/api";
+  static const String baseUrl = "https://simba-39la.onrender.com";
 
   // ====================== AUTH ======================
   static Future<Map<String, dynamic>> register({
