@@ -12,7 +12,7 @@ class ApiService {
     required String email,
     required String password,
   }) async {
-    final url = Uri.parse('$baseUrl/users/register');
+    final url = Uri.parse('$baseUrl/api/users/register');
 
     final response = await http.post(
       url,
@@ -31,7 +31,7 @@ class ApiService {
     required String email,
     required String password,
   }) async {
-    final url = Uri.parse('$baseUrl/users/signin');
+    final url = Uri.parse('$baseUrl/api/users/signin');
 
     final response = await http.post(
       url,
@@ -48,7 +48,7 @@ class ApiService {
   // ====================== PROTECTED ROUTES ======================
   static Future<Map<String, dynamic>> getProfile(String token) async {
     final response = await http.get(
-      Uri.parse("$baseUrl/users/profile"),
+      Uri.parse("$baseUrl/api/users/profile"),
       headers: {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ class ApiService {
 
   static Future<List<dynamic>> getPets(String token) async {
     final response = await http.get(
-      Uri.parse("$baseUrl/pets"),
+      Uri.parse("$baseUrl/api/users/pets"),
       headers: {"Authorization": "Bearer $token"},
     );
     final data = _handleResponse(response, "Failed to load pets");
@@ -68,7 +68,7 @@ class ApiService {
 
   static Future<List<dynamic>> getVaccinations(String token) async {
     final response = await http.get(
-      Uri.parse("$baseUrl/users/vaccinations"),
+      Uri.parse("$baseUrl/api/users/vaccinations"),
       headers: {"Authorization": "Bearer $token"},
     );
     final data = _handleResponse(response, "Failed to load vaccinations");
@@ -77,7 +77,7 @@ class ApiService {
 
   static Future<List<dynamic>> getPlans(String token) async {
     final response = await http.get(
-      Uri.parse("$baseUrl/users/plans"),
+      Uri.parse("$baseUrl/api/users/plans"),
       headers: {"Authorization": "Bearer $token"},
     );
     final data = _handleResponse(response, "Failed to load plans");
