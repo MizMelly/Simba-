@@ -6,14 +6,12 @@ class HowItWorksSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final isDesktop = screenWidth > 1100;
-    final isTablet = screenWidth > 700 && screenWidth <= 1100;
 
-    // Pre-calculate responsive values
-    final verticalPadding = isDesktop ? 100.0 : 70.0;
-    final horizontalPadding = isDesktop ? 60.0 : 24.0;
-    final headingFontSize = isDesktop ? 44.0 : (isTablet ? 36.0 : 28.0);
-    final spacingAfterHeading = isDesktop ? 90.0 : 60.0;
+    final verticalPadding = screenWidth > 1100 ? 100.0 : 70.0;
+    final horizontalPadding = screenWidth > 1100 ? 60.0 : 24.0;
+    final headingFontSize =
+        screenWidth > 1100 ? 44.0 : (screenWidth > 700 ? 36.0 : 28.0);
+    final spacingAfterHeading = screenWidth > 1100 ? 90.0 : 60.0;
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -23,19 +21,17 @@ class HowItWorksSection extends StatelessWidget {
       color: const Color(0xFFF5F5F5),
       child: Column(
         children: [
-          // Label
-          Text(
+          const Text(
             'HOW IT WORKS',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               letterSpacing: 1.2,
-              color: const Color(0xFF68B2AD),
+              color: Color(0xFF68B2AD),
             ),
           ),
           const SizedBox(height: 16),
 
-          // Main Heading
           Text(
             'Simple as 1-2-3-4',
             style: TextStyle(
@@ -46,124 +42,82 @@ class HowItWorksSection extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: spacingAfterHeading),   // ← Fixed: Removed 'const'
+          SizedBox(height: spacingAfterHeading),
 
-          // Steps
-          if (isDesktop)
-            _buildDesktopLayout()
-          else if (isTablet)
-            _buildTabletLayout()
-          else
-            _buildMobileLayout(),
+          // ✅ Responsive Layout
+          _buildResponsiveLayout(context),
         ],
       ),
     );
   }
 
-  // Desktop: 4 steps in one row with connecting lines
-  Widget _buildDesktopLayout() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildStep(1, Icons.person_add_outlined, 'Create Pet Profile',
-            'Add your pet\'s details and health history', false),
-        _buildStep(2, Icons.show_chart_outlined, 'Track Health',
-            'Log vaccinations, notes, and vet visits', false),
-        _buildStep(3, Icons.local_hospital, 'Chat / Book a Vet',
-            'Get instant access to verified vets', false),
-        _buildStep(4, Icons.card_membership_outlined, 'Subscribe to HMO',
-            'Choose an affordable monthly plan', true),
-      ],
+  // ✅ RESPONSIVE WRAP LAYOUT
+  Widget _buildResponsiveLayout(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    int columns;
+    double spacing;
+
+    if (screenWidth > 1100) {
+      columns = 4;
+      spacing = 40;
+    } else if (screenWidth > 700) {
+      columns = 2;
+      spacing = 30;
+    } else {
+      columns = 1;
+      spacing = 40;
+    }
+
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: spacing,
+      runSpacing: spacing,
+      children: List.generate(4, (index) {
+        double cardWidth;
+
+        if (columns == 4) {
+          cardWidth = (screenWidth / 4) - 80;
+        } else if (columns == 2) {
+          cardWidth = (screenWidth / 2) - 60;
+        } else {
+          cardWidth = screenWidth * 0.85;
+        }
+
+        return SizedBox(
+          width: cardWidth,
+          child: _buildStep(
+            stepNumber: index + 1,
+            icon: _getIcon(index + 1),
+            title: _getTitle(index + 1),
+            description: _getDescription(index + 1),
+          ),
+        );
+      }),
     );
   }
 
-  // Tablet: 2 columns
-  Widget _buildTabletLayout() {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: _buildStep(1, Icons.person_add_outlined, 'Create Pet Profile',
-                  'Add your pet\'s details and health history', false),
-            ),
-            const SizedBox(width: 30),
-            Expanded(
-              child: _buildStep(2, Icons.show_chart_outlined, 'Track Health',
-                  'Log vaccinations, notes, and vet visits', false),
-            ),
-          ],
-        ),
-        const SizedBox(height: 50),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: _buildStep(3, Icons.local_hospital, 'Chat / Book a Vet',
-                  'Get instant access to verified vets', false),
-            ),
-            const SizedBox(width: 30),
-            Expanded(
-              child: _buildStep(4, Icons.card_membership_outlined, 'Subscribe to HMO',
-                  'Choose an affordable monthly plan', true),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  // Mobile: Vertical stack
-  Widget _buildMobileLayout() {
-    return Column(
-      children: [
-        _buildStep(1, Icons.person_add_outlined, 'Create Pet Profile',
-            'Add your pet\'s details and health history', false),
-        const SizedBox(height: 50),
-        _buildStep(2, Icons.show_chart_outlined, 'Track Health',
-            'Log vaccinations, notes, and vet visits', false),
-        const SizedBox(height: 50),
-        _buildStep(3, Icons.local_hospital, 'Chat / Book a Vet',
-            'Get instant access to verified vets', false),
-        const SizedBox(height: 50),
-        _buildStep(4, Icons.card_membership_outlined, 'Subscribe to HMO',
-            'Choose an affordable monthly plan', true),
-      ],
-    );
-  }
-
-  Widget _buildStep(
-    int stepNumber,
-    IconData icon,
-    String title,
-    String description,
-    bool isLast,
-  ) {
-    return Expanded(
+  // ✅ STEP CARD
+  Widget _buildStep({
+    required int stepNumber,
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 320),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Stack(
             alignment: Alignment.topCenter,
             children: [
-              // Connecting Line (only on desktop)
-              if (!isLast)
-                Positioned(
-                  top: 45,
-                  left: 80,
-                  right: -40,
-                  child: Container(
-                    height: 3,
-                    color: const Color(0xFFD0D8DD),
-                  ),
-                ),
-
               // Icon Circle
               Container(
                 width: 88,
                 height: 88,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE8F3F1),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFE8F3F1),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -175,7 +129,7 @@ class HowItWorksSection extends StatelessWidget {
                 ),
               ),
 
-              // Step Number Badge
+              // Step Number
               Positioned(
                 top: 0,
                 right: 0,
@@ -200,9 +154,8 @@ class HowItWorksSection extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 24),
 
-          // Title
           Text(
             title,
             textAlign: TextAlign.center,
@@ -212,9 +165,8 @@ class HowItWorksSection extends StatelessWidget {
               color: Color(0xFF2C6975),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
 
-          // Description
           Text(
             description,
             textAlign: TextAlign.center,
@@ -227,5 +179,53 @@ class HowItWorksSection extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // ✅ ICONS
+  IconData _getIcon(int step) {
+    switch (step) {
+      case 1:
+        return Icons.person_add_outlined;
+      case 2:
+        return Icons.show_chart_outlined;
+      case 3:
+        return Icons.local_hospital;
+      case 4:
+        return Icons.card_membership_outlined;
+      default:
+        return Icons.help;
+    }
+  }
+
+  // ✅ TITLES
+  String _getTitle(int step) {
+    switch (step) {
+      case 1:
+        return 'Create Pet Profile';
+      case 2:
+        return 'Track Health';
+      case 3:
+        return 'Chat / Book a Vet';
+      case 4:
+        return 'Subscribe to HMO';
+      default:
+        return '';
+    }
+  }
+
+  // ✅ DESCRIPTIONS
+  String _getDescription(int step) {
+    switch (step) {
+      case 1:
+        return 'Add your pet\'s details and health history';
+      case 2:
+        return 'Log vaccinations, notes, and vet visits';
+      case 3:
+        return 'Get instant access to verified vets';
+      case 4:
+        return 'Choose an affordable monthly plan';
+      default:
+        return '';
+    }
   }
 }

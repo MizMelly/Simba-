@@ -64,41 +64,52 @@ class FeaturesSection extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: spacingAfterSubtitle),   // ← Fixed: Removed 'const'
+          SizedBox(height: spacingAfterSubtitle),
 
-          // Feature Cards - Responsive Layout
+          // Feature Cards
           LayoutBuilder(
             builder: (context, constraints) {
               if (isDesktop) {
-                // Desktop: 3 cards in a row
+                // Desktop: 3 cards with proper constraints
+                final cardWidth = (constraints.maxWidth - 48) / 3; // 24px gap × 2
+
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _featureCard(
-                      icon: Icons.assignment,
-                      title: 'Pet Profile & Records',
-                      description:
-                          'Track your pet\'s name, breed, age, weight, vaccination records, and health notes — all in one place.',
+                    SizedBox(
+                      width: cardWidth,
+                      child: _featureCard(
+                        icon: Icons.assignment,
+                        title: 'Pet Profile & Records',
+                        description:
+                            'Track your pet\'s name, breed, age, weight, vaccination records, and health notes — all in one place.',
+                      ),
                     ),
                     const SizedBox(width: 24),
-                    _featureCard(
-                      icon: Icons.chat_bubble_outline,
-                      title: 'Instant Vet Access',
-                      description:
-                          'Chat with or book a consultation with verified veterinarians whenever your pet needs care.',
+                    SizedBox(
+                      width: cardWidth,
+                      child: _featureCard(
+                        icon: Icons.chat_bubble_outline,
+                        title: 'Instant Vet Access',
+                        description:
+                            'Chat with or book a consultation with verified veterinarians whenever your pet needs care.',
+                      ),
                     ),
                     const SizedBox(width: 24),
-                    _featureCard(
-                      icon: Icons.shield_outlined,
-                      title: 'Pet HMO Plans',
-                      description:
-                          'Affordable monthly subscription plans (Basic & Premium) so your pet always has healthcare coverage.',
+                    SizedBox(
+                      width: cardWidth,
+                      child: _featureCard(
+                        icon: Icons.shield_outlined,
+                        title: 'Pet HMO Plans',
+                        description:
+                            'Affordable monthly subscription plans (Basic & Premium) so your pet always has healthcare coverage.',
+                      ),
                     ),
                   ],
                 );
               } else if (screenWidth > 600) {
-                // Tablet: 2 cards in a row
+                // Tablet: 2 cards
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -122,7 +133,7 @@ class FeaturesSection extends StatelessWidget {
                   ],
                 );
               } else {
-                // Mobile: Cards stacked vertically
+                // Mobile: Stacked
                 return Column(
                   children: [
                     _featureCard(
@@ -202,7 +213,7 @@ class FeaturesSection extends StatelessWidget {
           ),
           const SizedBox(height: 14),
 
-          // Description
+          // Description - This was the main cause of overflow
           Text(
             description,
             style: const TextStyle(

@@ -1,13 +1,15 @@
-cat > .gitignore << 'EOF'
 # Flutter & Dart
 .dart_tool/
 .packages
 .pub-cache/
-build/
 .flutter-plugins
 .flutter-plugins-dependencies
 .pub/
 *.lock
+
+# IGNORE all build EXCEPT web
+build/*
+!build/web/
 
 # Generated platform files
 android/.gradle/
@@ -25,29 +27,7 @@ linux/flutter/
 # OS
 .DS_Store
 Thumbs.db
-EOF
 
-# Flutter / Dart
-build/
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-*.dart_tool
-*.log
-
-# Web specific - very important
-build/web/
+# Web extras
 *.wasm
 *.js.map
-canvaskit/
-
-# General
-*.env
-.DS_Store
-Thumbs.db
-
-git add .gitignore
-git commit -m "Improve .gitignore - ignore build and generated files"
-git push
