@@ -43,16 +43,39 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-# Flutter & local files
+
+# Create .gitignore with good Flutter defaults
+cat > .gitignore << 'EOF'
+# Flutter & Dart
 .dart_tool/
-build/         # we will add build/web manually
-.idea/
-*.iml
-pubspec.lock
 .packages
+.pub-cache/
+build/
 .flutter-plugins
 .flutter-plugins-dependencies
+.pub/
+*.lock
 
-# OS files
+# Generated platform files (safe to ignore)
+android/.gradle/
+ios/Flutter/
+ios/Pods/
+macos/Flutter/ephemeral/
+macos/Flutter/GeneratedPluginRegistrant.swift
+windows/flutter/generated_plugin_registrant.*
+windows/flutter/generated_plugins.cmake
+linux/flutter/generated_plugin_registrant.*
+linux/flutter/generated_plugins.cmake
+
+# IDE & OS
+.vscode/
+.idea/
+*.iml
 .DS_Store
 Thumbs.db
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+EOF
