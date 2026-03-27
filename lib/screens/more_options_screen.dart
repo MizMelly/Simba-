@@ -134,7 +134,7 @@ class MoreOptionsScreen extends StatelessWidget {
 class _InfoBox extends StatelessWidget {
   final String title;
   final String value;
-  const _InfoBox({required this.title, required this.value, super.key});
+  const _InfoBox({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +159,7 @@ class _InfoBox extends StatelessWidget {
 class _SmallInfoBox extends StatelessWidget {
   final String title;
   final String value;
-  const _SmallInfoBox({required this.title, required this.value, super.key});
+  const _SmallInfoBox({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +194,6 @@ class _OptionCard extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     required this.color,
-    super.key,
   });
 
   @override

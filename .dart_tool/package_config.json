@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "async",
-      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.13.0",
+      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.13.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -33,9 +33,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8",
+      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.9",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.9"
     },
     {
       "name": "fake_async",
@@ -58,12 +58,6 @@
     {
       "name": "flutter",
       "rootUri": "file:///C:/flutter/packages/flutter",
-      "packageUri": "lib/",
-      "languageVersion": "3.8"
-    },
-    {
-      "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-6.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.8"
     },
@@ -108,12 +102,6 @@
       "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
-    },
-    {
-      "name": "lints",
-      "rootUri": "file:///C:/Users/jkuro/AppData/Local/Pub/Cache/hosted/pub.dev/lints-6.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.8"
     },
     {
       "name": "matcher",
@@ -287,7 +275,7 @@
       "name": "simba_app",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.10"
+      "languageVersion": "3.0"
     }
   ],
   "generator": "pub",

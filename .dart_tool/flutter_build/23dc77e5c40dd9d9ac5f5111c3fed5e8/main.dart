@@ -1,4 +1,4 @@
-// @dart=3.10
+// @dart=3.0
 // Flutter web bootstrap script for package:simba_app/main.dart.
 //
 // Generated file. Do not edit.
